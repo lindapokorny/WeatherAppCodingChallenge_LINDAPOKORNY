@@ -5,12 +5,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class RetrofitSingleton {
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://api.aerisapi.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    private static Retrofit instance;
 
+    private RetrofitSingleton(){}
     public static Retrofit getInstance() {
-        return getInstance();
+        if (instance != null) {
+            return instance;
+        }
+        instance = new Retrofit.Builder()
+                .baseUrl("http://api.aerisapi.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return instance;
     }
 }
+

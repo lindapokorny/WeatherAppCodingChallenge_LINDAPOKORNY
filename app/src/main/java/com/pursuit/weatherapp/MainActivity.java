@@ -2,6 +2,7 @@ package com.pursuit.weatherapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import retrofit2.Call;
@@ -13,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView minTemp;
     private TextView maxTemp;
     private TextView date;
+    private ImageView icon;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Retrofit retrofit = RetrofitSingleton.getInstance();
+
+        minTemp = findViewById(R.id.minTempF_text_view);
+        maxTemp = findViewById(R.id.maxTempF_text_view);
+        date = findViewById(R.id.date_iso_text_view);
+        icon = findViewById(R.id.image_view);
         Call<MyPojo> call = retrofit.create(WeatherService.class).getSuccess()
                 ;
 
@@ -35,8 +43,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        minTemp = findViewById(R.id.minTempF_text_view);
-        maxTemp = findViewById(R.id.maxTempF_text_view);
-        date = findViewById(R.id.date_iso_text_view);
     }
 }
